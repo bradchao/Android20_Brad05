@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.sql.Time;
@@ -22,17 +23,25 @@ public class MainActivity extends AppCompatActivity {
     private Counter counter;
     private TextView clock;
     private UIHander uiHander = new UIHander();
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listView = findViewById(R.id.listView);
         clock = findViewById(R.id.clock);
         leftBtn = findViewById(R.id.leftBtn);
         rightBtn = findViewById(R.id.rightBtn);
         changeDisplay();
         clock.setText(parseHS(hs));
+
+        initLap();
+    }
+
+    private void initLap(){
+
     }
 
     private void changeDisplay(){
@@ -41,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doLeft(View view) {
+        if (isRunning){
+            // LAP
+            doLap();
+        }else{
+            // RESET
+            doReset();
+        }
+    }
+
+    private void doReset(){
+        hs = 0;
+        clock.setText(parseHS(hs));
+    }
+
+    private void doLap(){
+
     }
 
     public void doRight(View view) {
